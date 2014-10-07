@@ -28,7 +28,7 @@ class Image(BaseAPI):
         image_dict = data['image']
 
         #Setting the attribute values
-        for attr in image_dict.keys():
+        for attr in list(image_dict.keys()):
             setattr(self,attr,image_dict[attr])
 
         return self

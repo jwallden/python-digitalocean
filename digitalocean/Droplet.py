@@ -48,17 +48,17 @@ class Droplet(BaseAPI):
 
     def __check_actions_in_data(self, data):
         # reloading actions if actions is provided.
-        if data.has_key(u"actions"):
+        if "actions" in data:
             self.action_ids = []
-            for action in data[u'actions']:
-                self.action_ids.append(action[u'id'])
+            for action in data['actions']:
+                self.action_ids.append(action['id'])
 
     def get_data(self, *args, **kwargs):
         """
             Customized version of get_data to perform __check_actions_in_data
         """
         data = super(Droplet, self).get_data(*args, **kwargs)
-        if kwargs.has_key("type"):
+        if "type" in kwargs:
             if kwargs["type"] == "POST":
                 self.__check_actions_in_data(data)
         return data
@@ -67,7 +67,7 @@ class Droplet(BaseAPI):
         droplets = self.get_data("droplets/%s" % self.id)
         droplet = droplets['droplet']
 
-        for attr in droplet.keys():
+        for attr in list(droplet.keys()):
             setattr(self,attr,droplet[attr])
 
         for net in self.networks['v4']:
@@ -266,7 +266,7 @@ class Droplet(BaseAPI):
             data["user_data"] = user_data
 
         if ssh_keys:
-            if type(ssh_keys) in [int, long, str]:
+            if type(ssh_keys) in [int, int, str]:
                 data['ssh_keys[]']= str(ssh_keys)
             elif type(ssh_keys) in [set, list, tuple, dict]:
                 data['ssh_keys[]'] = ','.join(str(x) for x in ssh_keys)
@@ -294,9 +294,9 @@ class Droplet(BaseAPI):
         if data:
             self.id = data['droplet']['id']
 
-        if data[u'droplet'].has_key(u"action_ids"):
+        if "action_ids" in data['droplet']:
             self.action_ids = []
-            for id in data[u'droplet'][u'action_ids']:
+            for id in data['droplet']['action_ids']:
                 self.action_ids.append(id)
 
     def get_events(self):
@@ -355,14 +355,14 @@ class Droplet(BaseAPI):
         kernels = list()
         data = self.get_data("droplets/%s/kernels/" % self.id)
         while True:
-                for jsond in data[u'kernels']:
+                for jsond in data['kernels']:
                     kernel = Kernel(**jsond)
                     kernel.token = self.token
                     kernels.append(kernel)
-                url = data[u'links'][u'pages'].get(u'next')
+                url = data['links']['pages'].get('next')
                 if not url:
                         break
-                data = self.get_data(data[u'links'][u'pages'].get(u'next'))
+                data = self.get_data(data['links']['pages'].get('next'))
 
         return kernels
 

@@ -27,9 +27,9 @@ class TestManager(unittest.TestCase):
         self.assertEqual(first_region.name, 'New York 1')
         self.assertEqual(first_region.slug, 'nyc1')
         self.assertItemsEqual(first_region.sizes,
-            [u'512mb', u'1gb', u'2gb', u'4gb', u'8gb',
-             u'16gb', u'32gb', u'48gb', u'64gb'])
-        self.assertItemsEqual(first_region.features, [u'virtio', u'backups'])
+            ['512mb', '1gb', '2gb', '4gb', '8gb',
+             '16gb', '32gb', '48gb', '64gb'])
+        self.assertItemsEqual(first_region.features, ['virtio', 'backups'])
 
     def test_get_all_sizes(self):
         all_sizes = self.manager.get_all_sizes()
@@ -45,8 +45,8 @@ class TestManager(unittest.TestCase):
         self.assertEqual(first_size.transfer, 1)
         self.assertEqual(first_size.transfer, 1)
         self.assertItemsEqual(first_size.regions,
-            [u'nyc1', u'sgp1', u'ams1', u'ams2',
-            u'sfo1', u'nyc2', u'lon1', u'nyc3'])
+            ['nyc1', 'sgp1', 'ams1', 'ams2',
+            'sfo1', 'nyc2', 'lon1', 'nyc3'])
 
     def test_get_all_images(self):
         all_images = self.manager.get_all_images()
@@ -61,8 +61,8 @@ class TestManager(unittest.TestCase):
         self.assertTrue(ubuntu_trusty_64.public)
         self.assertEqual(ubuntu_trusty_64.distribution, 'Ubuntu')
         self.assertItemsEqual(ubuntu_trusty_64.regions,
-            [u'nyc1', u'sgp1', u'ams1', u'ams2',
-            u'sfo1', u'nyc2', u'lon1', u'nyc3'])
+            ['nyc1', 'sgp1', 'ams1', 'ams2',
+            'sfo1', 'nyc2', 'lon1', 'nyc3'])
         self.assertIsInstance(ubuntu_trusty_64.id, int)
         self.assertIsNotNone(ubuntu_trusty_64.created_at)
 
@@ -80,8 +80,8 @@ class TestManager(unittest.TestCase):
         self.assertTrue(ubuntu_trusty_64.public)
         self.assertEqual(ubuntu_trusty_64.distribution, 'Ubuntu')
         self.assertItemsEqual(ubuntu_trusty_64.regions,
-            [u'nyc1', u'sgp1', u'ams1', u'ams2',
-            u'sfo1', u'nyc2', u'lon1', u'nyc3'])
+            ['nyc1', 'sgp1', 'ams1', 'ams2',
+            'sfo1', 'nyc2', 'lon1', 'nyc3'])
         self.assertIsInstance(ubuntu_trusty_64.id, int)
         self.assertIsNotNone(ubuntu_trusty_64.created_at)
 
@@ -96,9 +96,9 @@ class TestManager(unittest.TestCase):
         self.assertEqual(first_image.token, self.token)
         self.assertFalse(first_image.public)
         self.assertIsNone(first_image.slug)
-        self.assertIsInstance(first_image.name, unicode)
+        self.assertIsInstance(first_image.name, str)
         self.assertIsInstance(first_image.id, int)
-        self.assertIsInstance(first_image.distribution, unicode)
+        self.assertIsInstance(first_image.distribution, str)
         self.assertIsNotNone(first_image.created_at)
 
     def test_get_all_droplets(self):
@@ -108,12 +108,12 @@ class TestManager(unittest.TestCase):
         first_droplet = droplets[0]
         self.assertEqual(first_droplet.token, self.token)
         self.assertIsInstance(first_droplet.id, int)
-        self.assertIsInstance(first_droplet.name, unicode)
+        self.assertIsInstance(first_droplet.name, str)
         self.assertIsInstance(first_droplet.memory, int)
         self.assertIsInstance(first_droplet.vcpus, int)
         self.assertIsInstance(first_droplet.disk, int)
         self.assertIsInstance(first_droplet.region, dict)
-        self.assertIsInstance(first_droplet.status, unicode)
+        self.assertIsInstance(first_droplet.status, str)
         self.assertIsInstance(first_droplet.image, dict)
         self.assertIsInstance(first_droplet.size, dict)
         self.assertIsNotNone(first_droplet.locked)
@@ -129,10 +129,10 @@ class TestManager(unittest.TestCase):
         # Test the few things we can assume about a random ssh key.
         first_key = ssh_keys[0]
         self.assertEqual(first_key.token, self.token)
-        self.assertIsInstance(first_key.name, unicode)
+        self.assertIsInstance(first_key.name, str)
         self.assertIsInstance(first_key.id, int)
-        self.assertIsInstance(first_key.public_key, unicode)
-        self.assertIsInstance(first_key.fingerprint, unicode)
+        self.assertIsInstance(first_key.public_key, str)
+        self.assertIsInstance(first_key.fingerprint, str)
 
     def test_get_all_domains(self):
         domains = self.manager.get_all_domains()
@@ -140,8 +140,8 @@ class TestManager(unittest.TestCase):
         # Test the few things we can assume about a random domain.
         first_domain = domains[0]
         self.assertEqual(first_domain.token, self.token)
-        self.assertIsInstance(first_domain.name, unicode)
-        self.assertIsInstance(first_domain.zone_file, unicode)
+        self.assertIsInstance(first_domain.name, str)
+        self.assertIsInstance(first_domain.zone_file, str)
         self.assertIsInstance(first_domain.ttl, int)
 
 

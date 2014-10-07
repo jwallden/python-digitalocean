@@ -19,7 +19,7 @@ class Manager(BaseAPI):
         data = super(Manager, self).get_data(*args, **kwargs)
 
         params = {}
-        if kwargs.has_key("params"):
+        if "params" in kwargs:
             params = kwargs['params']
         unpaged_data = self.__deal_with_pagination(args[0], data, params)
 
@@ -38,7 +38,7 @@ class Manager(BaseAPI):
                 params.update({'page': page})
                 new_data = super(Manager, self).get_data(url, params=params)
 
-                more_values = new_data.values()[0]
+                more_values = list(new_data.values())[0]
                 for value in more_values:
                     values.append(value)
             data = {}

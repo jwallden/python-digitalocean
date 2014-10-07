@@ -29,9 +29,9 @@ class Action(BaseAPI):
     def load_directly(self):
         action = self.get_data("actions/%s" % self.id)
         if action:
-            action = action[u'action']
+            action = action['action']
             # Loading attributes
-            for attr in action.keys():
+            for attr in list(action.keys()):
                 setattr(self,attr,action[attr])
 
     def load(self):
@@ -42,9 +42,9 @@ class Action(BaseAPI):
             )
         )
         if action:
-            action = action[u'action']
+            action = action['action']
             # Loading attributes
-            for attr in action.keys():
+            for attr in list(action.keys()):
                 setattr(self,attr,action[attr])
 
     def __str__(self):

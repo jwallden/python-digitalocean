@@ -77,10 +77,10 @@ class Record(BaseAPI):
         url = "domains/%s/records/%s" % (self.domain, self.id)
         record = self.get_data(url)
         if record:
-            record = record[u'domain_record']
+            record = record['domain_record']
 
             #Setting the attribute values
-            for attr in record.keys():
+            for attr in list(record.keys()):
                 setattr(self,attr,record[attr])
 
     def __str__(self):

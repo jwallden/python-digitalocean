@@ -25,7 +25,7 @@ class Domain(BaseAPI):
         # URL https://api.digitalocean.com/v2/domains
         domains = self.get_data("domains/%s" % self.name)
 
-        for attr in domains.keys():
+        for attr in list(domains.keys()):
             setattr(self,attr,droplet[attr])
 
     def destroy(self):

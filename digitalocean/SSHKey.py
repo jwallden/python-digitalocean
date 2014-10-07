@@ -29,7 +29,7 @@ class SSHKey(BaseAPI):
         ssh_key = data['ssh_key']
 
         #Setting the attribute values
-        for attr in ssh_key.keys():
+        for attr in list(ssh_key.keys()):
             setattr(self,attr,ssh_key[attr])
         self.id = ssh_key['id']
 

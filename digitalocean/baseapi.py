@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 class BaseAPI(object):
     """
@@ -15,7 +15,7 @@ class BaseAPI(object):
         self.call_response = None
         self.end_point = "https://api.digitalocean.com/v2/"
 
-        for attr in kwargs.keys():
+        for attr in list(kwargs.keys()):
             setattr(self,attr,kwargs[attr])
 
     def __perform_get(self, url, headers=dict(), params=dict()):
@@ -77,4 +77,4 @@ class BaseAPI(object):
         return "%s" % self.token
 
     def __unicode__(self):
-        return u"%s" % self.__str__()
+        return "%s" % self.__str__()
